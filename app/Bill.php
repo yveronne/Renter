@@ -3,10 +3,12 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Bill extends Model
 {
     //
+    use SoftDeletes;
     protected $fillable =[
         'type', 'amount', 'billMonth', 'advance', 'monthAdvance', 'residue', 'monthResidue'
     ];
@@ -15,7 +17,7 @@ class Bill extends Model
         'paymentDate', 'tenantID'
     ];
 
-    protected $softDelete = true;
+    protected  $dates = ['deleted_at'];
 
     public function tenant(){
 
