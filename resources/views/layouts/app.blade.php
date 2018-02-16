@@ -11,9 +11,9 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Styles -->
-    <link href="{{ asset('css/bootstrap.css') }}" rel="stylesheet">
+    {{--<link href="{{ asset('css/bootstrap.css') }}" rel="stylesheet">
     <link href="{{ asset('css/perso.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/font-awesome-4.7.0/css/font-awesome.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/font-awesome-4.7.0/css/font-awesome.css') }}" rel="stylesheet">--}}
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
 <body>
@@ -78,7 +78,7 @@
     </div>
 
     <!-- Scripts -->
-    <script src="{{ asset('js/compiled.min.js') }}"></script>
+    {{--<script src="{{ asset('js/compiled.min.js') }}"></script>--}}
     <script src="{{ asset('js/app.js') }}"></script>
 </body>
 </html>

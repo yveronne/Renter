@@ -7,9 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 class Building extends Model
 {
     //
-    protected $fillable = ['buildingName', 'buildingLocation', 'floorsNumber' ];
+    protected $fillable = ['buildingName', 'buildingLocation', 'floorsNumber', 'renterID'];
 
-    protected $guarded = ['renterID'];
 
     public function renter(){
 

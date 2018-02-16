@@ -11,11 +11,9 @@ class Rent extends Model
     use SoftDeletes;
     protected $fillable = [
         'amount', 'rentMonth', 'advance', 'monthAdvance', 'residue', 'monthResidue',
-    ];
-
-    protected $guarded = [
         'paymentDate', 'tenantID'
     ];
+
 
     protected $dates = ['deleted_at'];
 

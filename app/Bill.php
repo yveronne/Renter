@@ -10,12 +10,10 @@ class Bill extends Model
     //
     use SoftDeletes;
     protected $fillable =[
-        'type', 'amount', 'billMonth', 'advance', 'monthAdvance', 'residue', 'monthResidue'
-    ];
-
-    protected $guarded = [
+        'type', 'amount', 'billMonth', 'advance', 'monthAdvance', 'residue', 'monthResidue',
         'paymentDate', 'tenantID'
     ];
+
 
     protected  $dates = ['deleted_at'];
 
