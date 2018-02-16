@@ -22,4 +22,8 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::group(['middleware' => 'auth'], function(){
     Route::resource('buildings', 'BuildingController');
+    Route::get('/buildings/{building}/apartments', 'BuildingController@apartmentList')
+        ->name('buildings.apartments');
+
+    Route::get('/apartments', 'ApartmentController@index');
 });

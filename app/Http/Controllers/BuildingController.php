@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Building;
-use App\Http\Requests\StoreBuildingRequest;
+use App\Http\Requests\BuildingRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -45,7 +45,7 @@ class BuildingController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreBuildingRequest $request)
+    public function store(BuildingRequest $request)
     {
         //
         Building::create([
@@ -91,7 +91,7 @@ class BuildingController extends Controller
      * @param  \App\Building  $building
      * @return \Illuminate\Http\Response
      */
-    public function update(StoreBuildingRequest $request, Building $building)
+    public function update(BuildingRequest $request, Building $building)
     {
         //
         $building->buildingName = $request->buildingName;
@@ -115,5 +115,11 @@ class BuildingController extends Controller
         $building->delete();
 
         return redirect();
+    }
+
+    public function apartmentList(Building $building){
+
+        $apartments = $building->apartments;
+
     }
 }
