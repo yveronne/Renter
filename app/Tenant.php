@@ -12,7 +12,7 @@ class Tenant extends Model
 
     protected $fillable = [
         'lastName', 'firstName', 'email', 'cniNumber', 'profession', 'phoneNumber',
-        'maritalStatus', 'apartmentID', 'tenureDate'
+        'maritalStatus', 'tenureDate'
     ];
 
     protected $dates = ['deleted_at'];

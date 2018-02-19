@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Building;
 use App\Http\Requests\BuildingRequest;
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -35,7 +36,7 @@ class BuildingController extends Controller
     public function create()
     {
         //
-        return view();
+        return view('createBuilding');
 
     }
 
@@ -48,14 +49,16 @@ class BuildingController extends Controller
     public function store(BuildingRequest $request)
     {
         //
-        Building::create([
+
+        $user = Auth::user();
+
+        $user->buildings()->create([
             'buildingName' => $request->buildingName,
             'buildingLocation' => $request->buildingLocation,
-            'floorsNumber' => $request->floorsNumber,
-            'renterID' => Auth::id()
+            'floorsNumber' => $request->floorsNumber
         ]);
 
-        return view();
+        return view('home');
     }
 
     /**
@@ -117,9 +120,4 @@ class BuildingController extends Controller
         return redirect();
     }
 
-    public function apartmentList(Building $building){
-
-        $apartments = $building->apartments;
-
-    }
 }

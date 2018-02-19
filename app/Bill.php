@@ -11,7 +11,7 @@ class Bill extends Model
     use SoftDeletes;
     protected $fillable =[
         'type', 'amount', 'billMonth', 'advance', 'monthAdvance', 'residue', 'monthResidue',
-        'paymentDate', 'tenantID'
+        'paymentDate'
     ];
 
 

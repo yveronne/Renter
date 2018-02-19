@@ -11,7 +11,7 @@ class Rent extends Model
     use SoftDeletes;
     protected $fillable = [
         'amount', 'rentMonth', 'advance', 'monthAdvance', 'residue', 'monthResidue',
-        'paymentDate', 'tenantID'
+        'paymentDate'
     ];
 
 

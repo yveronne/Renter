@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Apartment;
+use App\Building;
 use App\Http\Requests\ApartmentRequest;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class ApartmentController extends Controller
@@ -15,12 +15,16 @@ class ApartmentController extends Controller
         return $this->middleware('auth');
     }
 
+    //Liste des appartements de l'utilisateur
     public function index(){
 
-        /*$apartments = [];
-        $buildings = Auth::user()->buildings;
+        Auth::user()->buildings->apartments;
+    }
 
-        return view('apartments', compact('apartments'));*/
+    //Liste des appartements d'une propriété de l'utilisateur
+    public function apartmentList(Building $building){
+
+        $building->apartments;
     }
 
     //Créer à partir d'une propriété (argument id présent et on va envoyer ça à la vue)
@@ -29,16 +33,41 @@ class ApartmentController extends Controller
 
     }
 
-    public function store(ApartmentRequest $request){
+    public function store(ApartmentRequest $request, Building $building){
 
-        Apartment::create([
+        $building->apartments()->create([
             'apartmentNumber' => $request->apartmentNumber,
             'monthlyRent' => $request->monthlyRent,
             'livingRoomsNumber' => $request->livingRoomsNumber,
             'kitchensNumber' => $request->kitchensNumber,
             'bedroomsNumber' => $request->bedroomsNumber,
             'bathroomsNumber' => $request->bathroomsNumber,
-            'buildingID' => $request->buildingID
         ]);
+    }
+
+    public function show(Apartment $apartment){
+
+        Apartment::findOrFail($apartment->id);
+    }
+
+    public function edit(){
+
+    }
+
+    public function update(ApartmentRequest $request, Apartment $apartment){
+
+        $apartment->update([
+            'apartmentNumber' => $request->apartmentNumber,
+            'monthlyRent' => $request->monthlyRent,
+            'livingRoomsNumber' => $request->livingRoomsNumber,
+            'kitchensNumber' => $request->kitchensNumber,
+            'bedroomsNumber' => $request->bedroomsNumber,
+            'bathroomsNumber' => $request->bathroomsNumber
+        ]);
+    }
+
+    public function destroy(Apartment $apartment){
+
+        $apartment->delete();
     }
 }
