@@ -25,7 +25,7 @@ class BuildingController extends Controller
     {
         //
         $buildings = Auth::user()->buildings;
-        return view('buildings', compact('buildings'));
+        return view('buildings.buildings', compact('buildings'));
     }
 
     /**
@@ -36,7 +36,7 @@ class BuildingController extends Controller
     public function create()
     {
         //
-        return view('createBuilding');
+        return view('buildings.createBuilding');
 
     }
 
@@ -70,8 +70,8 @@ class BuildingController extends Controller
     public function show(Building $building)
     {
         //
-        Building::findOrFail($building->id);
-        return view();
+        $building = Building::findOrFail($building->id);
+        return view('buildings.buildingDetails', compact('building'));
 
     }
 
