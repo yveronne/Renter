@@ -58,7 +58,7 @@ class BuildingController extends Controller
             'floorsNumber' => $request->floorsNumber
         ]);
 
-        return view('home');
+        return redirect('buildings')->with('status' , 'Votre propriété a bien été créée');
     }
 
     /**
@@ -115,9 +115,9 @@ class BuildingController extends Controller
     public function destroy(Building $building)
     {
         //
-        $building->delete();
+        Building::destroy($building->id);
 
-        return redirect();
+        return redirect('buildings')->with('status', 'La propriété a bien été supprimée');
     }
 
 }

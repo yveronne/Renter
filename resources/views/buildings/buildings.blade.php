@@ -3,14 +3,22 @@
 @section('content')
     <div class="row">
         <div class="col-xs-12 col-sm-12 col-md-12 hamburgerDiv">
-            <a href="#">Accueil</a> > <a href="#" class="actual">Mes propriétés</a>
+            <a href="{{route('home')}}">Accueil</a> > <a href="{{route('buildings.index')}}" class="actual">Mes propriétés</a>
         </div>
     </div>
 
     <div class="row">
         <div class="col-xs-12 col-sm-12 col-md-12 contentPart">
             <h4 class="titleHome">MES PROPRIETES</h4>
-            <a href="#">Ajouter une propriété</a>
+
+            @if (session('status'))
+                <div class="alert alert-success">
+                    {{ session('status') }}
+                </div>
+            @endif
+
+            <span class="right"><i class="fas fa-plus"></i><a href="{{route('buildings.create')}}">Ajouter une propriété</a></span>
+            <br>
             <br>
             <div class="row">
                 @foreach($buildings as $building)

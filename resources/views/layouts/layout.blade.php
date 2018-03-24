@@ -6,7 +6,7 @@
         <title>{{config('app.name')}}</title>
 
         {{--Styles--}}
-        <link rel="stylesheet" href="{{asset('css/bootstrap.css')}}">
+        {{--<link rel="stylesheet" href="{{asset('css/bootstrap.css')}}">--}}
         <link rel="stylesheet" href="{{asset('css/perso.css')}}">
         <link rel="stylesheet" href="{{asset('css/myStyle.css')}}">
         <script defer src  ="{{asset('js/fontawesome-all.js')}}"></script>

@@ -135,17 +135,17 @@ a.nav-link{
 	padding-top: 11px;	
 }
 
-#hamburgerDiv a{
+.hamburgerDiv a{
 	color: black;
 }
 
-#hamburgerDiv a:hover{
+.hamburgerDiv a:hover{
 	text-decoration: underline;
 	font-style: italic;
 	color: #1F7A99;
 }
 
-#hamburgerDiv a.actual{
+.hamburgerDiv a.actual{
 	color: #1F7A99;
 }
 
@@ -163,6 +163,11 @@ a.nav-link{
 
 .contentPart .row .col-md-3:first-child{
 	margin-left: 20px
+}
+
+.right{
+	text-align: right;
+	float: right;
 }
 
 table th{
