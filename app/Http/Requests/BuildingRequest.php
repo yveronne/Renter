@@ -24,7 +24,6 @@ class BuildingRequest extends FormRequest
     public function rules()
     {
         return [
-            'buildingName' => 'unique:buildings',
             'buildingLocation' => 'required',
             'floorsNumber' => 'required|integer'
         ];
@@ -33,7 +32,6 @@ class BuildingRequest extends FormRequest
     public function messages()
     {
         return [
-            'buildingName.unique' => 'Une propriété avec ce nom existe déjà',
             "buildingLocation.required" => 'La localisation de la propriété est requise',
             'floorsNumber.required' => 'Le nombre d\'étages est requis',
             'floorsNumber.integer' => 'Le nombre d\'étages doit être un entier'

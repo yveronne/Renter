@@ -12,7 +12,7 @@ class Building extends Model
 
     public function renter(){
 
-        $this->belongsTo('App\User', 'renterID');
+        return $this->belongsTo('App\User', 'renterID');
     }
 
     public function apartments(){

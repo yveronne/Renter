@@ -9,7 +9,7 @@ class Apartment extends Model
     //
     protected $fillable = [
         'apartmentNumber', 'monthlyRent', 'livingRoomsNumber', 'kitchensNumber',
-        'bedroomsNumber', 'bathroomsNumber'
+        'bedroomsNumber', 'bathroomsNumber', 'buildingID'
     ];
 
 

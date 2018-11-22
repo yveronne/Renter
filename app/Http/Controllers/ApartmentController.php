@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Apartment;
 use App\Building;
 use App\Http\Requests\ApartmentRequest;
+use App\Http\Requests\TenantRequest;
 use Illuminate\Support\Facades\Auth;
 
 class ApartmentController extends Controller
@@ -18,36 +19,34 @@ class ApartmentController extends Controller
     //Liste des appartements de l'utilisateur
     public function index(){
 
-        Auth::user()->buildings->apartments;
+        $buildings = Building::all();
+        return view('apartments.apartments', compact('buildings'));
     }
 
-    //Liste des appartements d'une propriété de l'utilisateur
-    public function apartmentList(Building $building){
-
-        $building->apartments;
-    }
-
-    //Créer à partir d'une propriété (argument id présent et on va envoyer ça à la vue)
-    //ou alors créer à partir de rien et on va envoyer la liste des propriétés à la vue
     public function create(){
 
     }
 
-    public function store(ApartmentRequest $request, Building $building){
+    public function store(ApartmentRequest $request, $id){
 
-        $building->apartments()->create([
+        $building = Building::findOrFail($id);
+        Apartment::create([
             'apartmentNumber' => $request->apartmentNumber,
             'monthlyRent' => $request->monthlyRent,
             'livingRoomsNumber' => $request->livingRoomsNumber,
             'kitchensNumber' => $request->kitchensNumber,
             'bedroomsNumber' => $request->bedroomsNumber,
             'bathroomsNumber' => $request->bathroomsNumber,
+            'buildingID' => $building->id
         ]);
+
+        return redirect('buildings/' .$building->id)->with('status', 'L\'appartement a bien été ajouté');
     }
 
     public function show(Apartment $apartment){
 
-        Apartment::findOrFail($apartment->id);
+        $apartment = Apartment::findOrFail($apartment->id);
+        return view('apartments.apartmentDetails', compact('apartment'));
     }
 
     public function edit(){
@@ -67,7 +66,15 @@ class ApartmentController extends Controller
     }
 
     public function destroy(Apartment $apartment){
+        $apartment = Apartment::whereKey($apartment->id);
+        Apartment::destroy($apartment->id);
+    }
 
-        $apartment->delete();
+    public function addTenantView(Apartment $apartment){
+        return view('apartments.addTenant', compact('apartment'));
+    }
+
+    public function addTenant(TenantRequest $request, Apartment $apartment){
+
     }
 }

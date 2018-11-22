@@ -1,59 +1,77 @@
-@extends('layouts.layout')
+@extends('layouts.buildingsLayout')
 
 @section('content')
-    <div class="row">
-        <div class="col-xs-12 col-sm-12 col-md-12 hamburgerDiv">
-            <a href="{{route('home')}}">Accueil</a> > <a href="{{route('buildings.index')}}">Mes propriétés</a> > <a href="{{route('buildings.create')}}" class="actual">Ajouter une propriété</a>
+    <div class="breadcrumbs">
+        <div class="col-sm-4">
+            <div class="page-header float-left">
+                <div class="page-title">
+                    <h1>Ajouter une propriété</h1>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-8">
+            <div class="page-header float-right">
+                <div class="page-title">
+                    <ol class="breadcrumb text-right">
+                        <li><a href="{{url('/home')}}">Accueil</a></li>
+                        <li><a href="{{url('/buildings')}}">Mes propriétés</a></li>
+                        <li class="active">Ajouter une propriété</li>
+                    </ol>
+                </div>
+            </div>
         </div>
     </div>
 
-    <div class="row">
-        <div class="col-xs-12 col-sm-12 col-md-12 contentPart">
-            <h4 class="titleHome">AJOUTER UNE PROPRIETE</h4>
+    <div class="content mt-3">
+        <div class="animated fadeIn">
             <form action="{{route('buildings.store')}}" method="POST" class="col-md-6 col-md-offset-3">
                 {{csrf_field()}}
 
-                @if($errors->any())
-                    <div class="alert alert-danger">
-                        <ul>
-                            @foreach($errors->all() as $error)
-                                <li>{{$error}}</li>
-                            @endforeach
-                        </ul>
+                <div class="row form-group{{$errors->has('buildingName') ? ' has-warning' : ''}}">
+                    <div class="col-md-5">
+                        <label for="buildingName" class="form-control-label">Nom de la propriété</label>
                     </div>
-                @endif
-
-                <div class="md-form{{ $errors->has('buildingName') ? 'has-error' : ''}}">
-                    <input type="text" id="buildingName" class="form-control" name="buildingName" value="{{ old('buildingName') }}" autofocus>
-                    <label for="buildingName">Nom de la propriété</label>
+                    <div class="col-md-7">
+                        <input type="text" name="buildingName" id="buildingName" value="{{old('buildingName')}}" class="form-control{{$errors->has('buildingName') ? ' is-invalid' : ''}}">
+                        @if ($errors->has('buildingName'))
+                            <small class="text-danger">
+                                <strong>{{ $errors->first('buildingName') }}</strong>
+                            </small>
+                        @endif
+                    </div>
                 </div>
-                {{--@if($errors->has('buildingName'))
-                    <small class="text-danger">{{ $errors->first('buildingName') }}</small>
-                @endif--}}
-
-                <div class="md-form{{ $errors->has('buildingLocation') ? 'has-error' : ''}}">
-                    <input type="text" id="buildingLocation" class="form-control" name="buildingLocation" value="{{ old('buildingLocation') }}">
-                    <label for="buildingLocation">Localisation</label>
+                <div class="row form-group{{$errors->has('buildingLocation') ? ' has-warning' : ''}}">
+                    <div class="col-md-5">
+                        <label for="buildingLocation" class="form-control-label">Localisation</label>
+                    </div>
+                    <div class="col-md-7">
+                        <input type="text" name="buildingLocation" id="buildingLocation" value="{{old('buildingLocation')}}" class="form-control{{$errors->has('buildingLocation') ? ' is-invalid' : ''}}">
+                        @if ($errors->has('buildingLocation'))
+                            <small class="text-danger">
+                                <strong>{{ $errors->first('buildingLocation') }}</strong>
+                            </small>
+                        @endif
+                    </div>
                 </div>
-                {{--@if($errors->has('buildingLocation'))
-                    <small class="text-danger">{{ $errors->first('buildingLocation') }}</small>
-                @endif--}}
-
-                <div class="md-form{{ $errors->has('floorsNumber') ? 'has-error' : ''}}">
-                    <input type="text" id="floorsNumber" class="form-control" name="floorsNumber" value="{{ old('floorsNumber') }}">
-                    <label for="floorsNumber">Nombre d'étages</label>
-
+                <div class="row form-group{{$errors->has('floorsNumber') ? ' has-warning' : ''}}">
+                    <div class="col-md-5">
+                        <label for="floorsNumber" class="form-control-label">Nombre d'étages</label>
+                    </div>
+                    <div class="col-md-7">
+                        <input type="number" step="1" name="floorsNumber" id="floorsNumber" value="{{old('floorsNumber')}}" class="form-control{{$errors->has('floorsNumber') ? ' is-invalid' : ''}}">
+                        @if ($errors->has('buildingLocation'))
+                            <small class="text-danger">
+                                <strong>{{ $errors->first('floorsNumber') }}</strong>
+                            </small>
+                        @endif
+                    </div>
                 </div>
-                {{--@if($errors->has('floorsNumber'))
-                    <small class="text-danger">{{ $errors->first('floorsNumber') }}</small>
-                @endif--}}
 
                 <div class="text-center mt-4">
-                    <button class="btn btn-mine" type="submit">Ajouter</button>
+                    <button class="btn btn-primary" type="submit">Ajouter</button>
                 </div>
             </form>
-
         </div>
     </div>
-
 @endsection
+

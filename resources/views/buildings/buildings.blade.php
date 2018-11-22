@@ -1,47 +1,57 @@
-@extends('layouts.layout')
+@extends('layouts.buildingsLayout')
 
 @section('content')
-    <div class="row">
-        <div class="col-xs-12 col-sm-12 col-md-12 hamburgerDiv">
-            <a href="{{route('home')}}">Accueil</a> > <a href="{{route('buildings.index')}}" class="actual">Mes propriétés</a>
+    <div class="breadcrumbs">
+        <div class="col-sm-4">
+            <div class="page-header float-left">
+                <div class="page-title">
+                    <h1>Mes propriétés</h1>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-8">
+            <div class="page-header float-right">
+                <div class="page-title">
+                    <ol class="breadcrumb text-right">
+                        <li><a href="{{url('/home')}}">Accueil</a></li>
+                        <li class="active">Mes propriétés</li>
+                    </ol>
+                </div>
+            </div>
         </div>
     </div>
 
-    <div class="row">
-        <div class="col-xs-12 col-sm-12 col-md-12 contentPart">
-            <h4 class="titleHome">MES PROPRIETES</h4>
-
-            @if (session('status'))
-                <div class="alert alert-success">
-                    {{ session('status') }}
-                </div>
-            @endif
-
-            <span class="right"><i class="fas fa-plus"></i><a href="{{route('buildings.create')}}">Ajouter une propriété</a></span>
-            <br>
-            <br>
-            <div class="row">
-                @foreach($buildings as $building)
-                    <div class="col-md-3 card">
-
-                        <!--Card image-->
-                        <img class="img-fluid" src="{{asset('images/photo_immeuble.jpg')}}" alt="Image d'appartement">
-
-                        <!--Card content-->
-                        <div class="card-body">
-                            <!--Title-->
-                            <h4 class="buildingName">{{$building->buildingName}}</h4>
-                            <!--Text-->
-                            <h5>{{$building->buildingLocation}}</h5>
-                            <h6>{{$building->floorsNumber}} étages</h6>
-                            <a href="{{route('buildings.show', [$building])}}" class="btn btn-mine">Détails</a>
-                        </div>
-
-                    </div>
-                    <div class="col-md-1"></div>
-                @endforeach
+    <div class="content mt-3">
+        @if(session('status'))
+            <div class="alert alert-success">
+                {{ session('status') }}
             </div>
-
+        @endif
+        <div class="animated fadeIn">
+            <div class="row addSomething">
+                <div class="col-md-12">
+                    <a href="{{url('/buildings/create')}}" class="btn btn-outline-primary"><i class="fa fa-plus"></i>Ajouter une propriété</a>
+                </div>
+            </div>
+            @foreach($buildings->chunk(4) as $buildingsChunk)
+                <div class="row">
+                    @foreach($buildingsChunk as $building)
+                        <div class="col-md-3">
+                            <div class="card">
+                                <img src="{{asset('images/photo_immeuble.jpg')}}" alt="" class="img-fluid" style="height: 20%">
+                                <div class="card-body">
+                                    <h4 class="buildingCardTitle">{{$building->buildingName}}</h4>
+                                    <p class="card-text">
+                                        <span><span class="ti-location-pin"></span> {{$building->buildingLocation}}</span><br>
+                                        <i class="fa fa-sort-numeric-asc"></i> <span>{{$building->floorsNumber}} étages</span><br>
+                                        <a href="{{route('buildings.show', [$building])}}" class="btn btn-primary">Détails</a>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    @endforeach
+                </div>
+            @endforeach
         </div>
     </div>
 @endsection

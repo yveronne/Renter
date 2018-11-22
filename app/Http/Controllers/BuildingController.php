@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Apartment;
 use App\Building;
+use App\Http\Requests\ApartmentRequest;
 use App\Http\Requests\BuildingRequest;
 use App\User;
 use Illuminate\Http\Request;
@@ -16,11 +18,6 @@ class BuildingController extends Controller
         $this->middleware('auth');
     }
 
-    /**
-     * Renvoie la liste des propriétés du bailleur authentifié
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
         //
@@ -28,24 +25,7 @@ class BuildingController extends Controller
         return view('buildings.buildings', compact('buildings'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-        return view('buildings.createBuilding');
 
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(BuildingRequest $request)
     {
         //
@@ -58,15 +38,10 @@ class BuildingController extends Controller
             'floorsNumber' => $request->floorsNumber
         ]);
 
-        return redirect('buildings')->with('status' , 'Votre propriété a bien été créée');
+        return redirect('/buildings')->with('status' , 'Votre propriété a bien été créée');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Building  $building
-     * @return \Illuminate\Http\Response
-     */
+
     public function show(Building $building)
     {
         //
@@ -75,34 +50,19 @@ class BuildingController extends Controller
 
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Building  $building
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Building $building)
+
+    public function update(Building $building, BuildingRequest $request)
     {
         //
-        return view();
-    }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Building  $building
-     * @return \Illuminate\Http\Response
-     */
-    public function update(BuildingRequest $request, Building $building)
-    {
-        //
-        $building->buildingName = $request->buildingName;
-        $building->buildingLocation = $request->buildingLocation;
-        $building->floorsNumber = $request->floorsNumber;
-        $building->save();
+        $building = Building::findOrFail($building->id);
+        $building->update([
+            'buildingName' => $request->buildingName,
+            'buildingLocation' => $request->buildingLocation,
+            'floorsNumber' => $request->floorsNumber,
+        ]);
 
-        return redirect();
+        return redirect('buildings/' .$building->id)->with('status', 'Vos modifications ont bien été enregistrées');
 
     }
 
@@ -118,6 +78,27 @@ class BuildingController extends Controller
         Building::destroy($building->id);
 
         return redirect('buildings')->with('status', 'La propriété a bien été supprimée');
+    }
+
+    public function addApartmentView(Building $building){
+
+        $building = Building::findOrFail($building->id);
+        return view('buildings.addApartment', compact('building'));
+    }
+
+    public function addApartment(Building $building, ApartmentRequest $request){
+
+        $building = Building::findOrFail($building->id);
+        Apartment::create([
+            'apartmentNumber' => $request['apartmentNumber'],
+            'monthlyRent' => $request['monthlyRent'],
+            'livingRoomsNumber' => $request['livingRoomsNumber'],
+            'kitchensNumber' => $request['kitchensNumber'],
+            'bedroomsNumber' => $request['bedroomsNumber'],
+            'bathroomsNumber' => $request['bathroomsNumber'],
+            'buildingID' => $building->id
+        ]);
+        return redirect('/buildings/'.$building->id)->with('status', 'L\'appartement a bien été ajouté');
     }
 
 }

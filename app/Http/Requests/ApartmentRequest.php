@@ -24,7 +24,7 @@ class ApartmentRequest extends FormRequest
     public function rules()
     {
         return [
-            'apartmentNumber' => 'integer|required',
+            'apartmentNumber' => 'required',
             'monthlyRent' => 'integer|required',
             'livingRoomsNumber' => 'required|integer',
             'kitchensNumber' => 'required|integer',
