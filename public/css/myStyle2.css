@@ -1,0 +1,239 @@
+@font-face{
+    font-family: 'Trajan Pro Bold';
+    src : url('../fonts/Trajan Pro Bold.ttf');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face{
+    font-family: 'Perpetua';
+    src : url('../fonts/pertibd.ttf');
+    font-weight: bold;
+    font-style: normal;
+}
+
+@font-face{
+    font-family: 'Myriad Pro Regular';
+    src : url('../fonts/Myriad Web Pro Regular.ttf');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face{
+    font-family: 'Trajan Pro Regular';
+    src : url('../fonts/Trajan Pro Regular.ttf');
+    font-weight: normal;
+    font-style: normal;
+}
+
+body{
+    background-color: #DDF7F9
+}
+
+header .navbar{
+    background-color: #FFFFFF
+}
+
+
+a.nav-link{
+    background-color: #DDF7F9;
+    margin-left: 50px;
+    font-family: 'Myriad Pro Regular';
+    font-size: 18px;
+}
+
+.dropdown-menu .nav-item a:hover{
+    background-color: #1F7A99
+}
+
+.dropdown a{
+    color: #1F7A99;
+}
+
+#slide-out{
+    background-color: #1F7A99;
+    padding-top: 20px;
+}
+
+#slide-out>div:first-child{
+    margin-left: 40px;
+}
+
+
+
+#slide-out>a{
+    color : white;
+    font-family: 'Trajan Pro Bold';
+    font-size: 16px;
+    margin: 20px 16px 20px 16px;
+    display: block;
+    border-bottom: 2px solid white;
+}
+
+#mySideBar{
+    background-color: #1F7A99;
+    padding-top: 20px;
+    position: relative;
+    display: block
+
+}
+
+#mySideBar>a{
+    color : white;
+    font-family: 'Trajan Pro Bold';
+    font-size: 16px;
+    padding: 20px 16px 20px 16px;
+    display: block;
+    border-bottom: 2px solid white;
+}
+
+#mySideBar>a:hover{
+    background-color: lightgray;
+}
+
+#mySideBar+a:first-child{
+    border-top: 2px solid white;
+}
+
+
+#mySideBar img{
+    margin: 10px;
+}
+
+.nameSpan a{
+    font-family: 'Perpetua';
+    font-size: 16px;
+    color : #000000;
+    padding-left: 16px;
+    padding-right: 16px;
+}
+
+.nameSpan a:hover{
+    font-style: italic;
+    text-decoration: underline;
+    color : #000000;
+}
+
+#mySideBar>div{
+    padding-bottom: 20px;
+    border-bottom: 2px solid white
+}
+
+.container-fluid{
+    padding-right: 30px
+}
+
+.content{
+    padding-top: 20px;
+    padding-left: 40px;
+}
+
+.hamburgerDiv{
+    box-shadow: 5px -10px 10px gray;
+    background-color: #FFFFFF;
+    height: 50px;
+    padding-top: 11px;
+}
+
+.hamburgerDiv a{
+    color: black;
+}
+
+.hamburgerDiv a:hover{
+    text-decoration: underline;
+    font-style: italic;
+    color: #1F7A99;
+}
+
+.hamburgerDiv a.actual{
+    color: #1F7A99;
+}
+
+.titleHome{
+    color: #1F7A99;
+    border-bottom: 2px solid gray;
+    margin-top: 20px;
+    margin-bottom: 30px
+}
+
+.contentPart{
+    background-color: #FFFFFF;
+    margin-top: 20px;
+}
+
+.contentPart .row .col-md-3:first-child{
+    margin-left: 20px
+}
+
+.right{
+    text-align: right;
+    float: right;
+}
+
+table th{
+    font-weight: bold
+}
+
+.btn-mine{
+    background-color: #1F7A99
+}
+
+.buttonHome{
+    text-align: right;
+}
+
+.buildingName{
+    font-family: Perpetua;
+    font-size: 16px;
+    color: #1F7A99;
+}
+
+.card-body h4.tenantName{
+    font-family: 'Trajan Pro Regular', serif;
+    font-size: 10px;
+}
+
+.tenantCard{
+    border: 1px solid #1F7A99;
+    background-color: white;
+    align-items: center;
+    padding-top: 15px;
+}
+
+.tenantCard div{
+    text-align: center;
+    margin: auto;
+    margin-bottom: 15px;
+
+}
+
+.tenantPhoto{
+    height: 100px;
+    width: 100px;
+    border: 1px solid black;
+    border-radius: 100px
+}
+
+.tenantInfo h3{
+    font-family: 'Trajan Pro Regular';
+    font-size: 15px
+}
+
+footer *{
+    background-color: white;
+    color: #000000;
+
+}
+
+footer .col-md-12 a{
+    color: #000000;
+}
+
+
+
+
+
+
+
+
+
