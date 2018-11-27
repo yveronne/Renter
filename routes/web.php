@@ -33,6 +33,6 @@ Route::group(['middleware' => 'auth'], function(){
     Route::get('/apartments/{apartment}', 'ApartmentController@show')->name('apartments.show');
     Route::post('/apartments/{apartment}/update', 'ApartmentController@update')->name('apartments.update');
     //Route::post('/apartments', 'ApartmentController@store')->name('apartments.store');
-    Route::get('/apartments/{apartment}/addtenant', 'ApartmentController@addTenantView');
-    Route::post('/apartments/{apartment}/addtenant', 'ApartmentController@addTenant');
+    Route::get('/apartments/{apartment}/addtenant', 'TenantController@addTenantView');
+    Route::post('/apartments/{apartment}/addtenant', 'TenantController@addTenant');
 });

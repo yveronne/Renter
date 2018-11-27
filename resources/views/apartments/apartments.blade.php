@@ -57,8 +57,8 @@
                                     <th scope="row">{{$apartment->apartmentNumber}}</th>
                                     <td>{{$apartment->monthlyRent}}</td>
                                     <td>
-                                        @if(!is_null($apartment->tenant))
-                                        {{$apartment->tenant->lastName}} {{$apartment->tenant->firstName}}
+                                        @if(!is_null($apartment->getCurrentTenant()))
+                                        {{$apartment->getCurrentTenant()->lastName}} {{$apartment->getCurrentTenant()->firstName}}
                                         @else
                                             <a href="{{url('/apartments/'.$apartment->id.'/addtenant')}}" class="btn btn-outline-primary">Enregistrer le locataire</a>
                                         @endif

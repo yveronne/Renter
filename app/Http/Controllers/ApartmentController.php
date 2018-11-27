@@ -70,11 +70,4 @@ class ApartmentController extends Controller
         Apartment::destroy($apartment->id);
     }
 
-    public function addTenantView(Apartment $apartment){
-        return view('apartments.addTenant', compact('apartment'));
-    }
-
-    public function addTenant(TenantRequest $request, Apartment $apartment){
-
-    }
 }

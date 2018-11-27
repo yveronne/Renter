@@ -44,6 +44,23 @@
                         <strong>{{$apartment->apartmentNumber}}</strong>
                     </div>
                 </div>
+                <div class="row form-group{{$errors->has('civility') ? ' has-warning' : ''}}">
+                    <div class="col col-md-5"><label class=" form-control-label">Civilité</label></div>
+                    <div class="col col-md-7">
+                        <div class="form-check">
+                            <div class="radio">
+                                <label for="mister" class="form-check-label ">
+                                    <input type="radio" id="mister" name="mister" value="Monsieur" class="form-check-input">Monsieur
+                                </label>
+                            </div>
+                            <div class="miss">
+                                <label for="miss" class="form-check-label ">
+                                    <input type="radio" id="miss" name="miss" value="Madame" class="form-check-input">Madame
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <div class="row form-group{{$errors->has('lastName') ? ' has-warning' : ''}}">
                     <div class="col-md-5">
                         <label for="lastName" class="form-control-label">Noms</label>
@@ -110,16 +127,20 @@
                     </div>
                 </div>
                 <div class="row form-group{{$errors->has('maritalStatus') ? ' has-warning' : ''}}">
-                    <div class="col-md-5">
-                        <label for="maritalStatus" class="form-control-label">Statut matrimonial</label>
-                    </div>
-                    <div class="col-md-7">
-                        <input type="text" name="maritalStatus" id="maritalStatus" value="{{old('maritalStatus')}}" class="form-control{{$errors->has('maritalStatus') ? ' is-invalid' : ''}}">
-                        @if ($errors->has('maritalStatus'))
-                            <small class="text-danger">
-                                <strong>{{ $errors->first('maritalStatus') }}</strong>
-                            </small>
-                        @endif
+                    <div class="col col-md-5"><label class=" form-control-label">Statut matrimonial</label></div>
+                    <div class="col col-md-7">
+                        <div class="form-check">
+                            <div class="radio">
+                                <label for="single" class="form-check-label ">
+                                    <input type="radio" id="single" name="single" value="Célibataire" class="form-check-input">Célibataire
+                                </label>
+                            </div>
+                            <div class="Marié(e)">
+                                <label for="maried" class="form-check-label ">
+                                    <input type="radio" id="maried" name="maried" value="Marié(e)" class="form-check-input">Marié(e)
+                                </label>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="row form-group{{$errors->has('phoneNumber') ? ' has-warning' : ''}}">
@@ -144,6 +165,32 @@
                         @if ($errors->has('tenureDate'))
                             <small class="text-danger">
                                 <strong>{{ $errors->first('tenureDate') }}</strong>
+                            </small>
+                        @endif
+                    </div>
+                </div>
+                <div class="row form-group{{$errors->has('caution') ? ' has-warning' : ''}}">
+                    <div class="col-md-5">
+                        <label for="caution" class="form-control-label">Caution (en F CFA)</label>
+                    </div>
+                    <div class="col-md-7">
+                        <input type="number" name="caution" id="caution" value="{{old('caution')}}" class="form-control{{$errors->has('caution') ? ' is-invalid' : ''}}">
+                        @if ($errors->has('caution'))
+                            <small class="text-danger">
+                                <strong>{{ $errors->first('caution') }}</strong>
+                            </small>
+                        @endif
+                    </div>
+                </div>
+                <div class="row form-group{{$errors->has('advance') ? ' has-warning' : ''}}">
+                    <div class="col-md-5">
+                        <label for="advance" class="form-control-label">Nombre de mois d'avance de loyer</label>
+                    </div>
+                    <div class="col-md-7">
+                        <input type="number" step="1" min="0" name="advance" id="advance" value="{{old('advance')}}" class="form-control{{$errors->has('advance') ? ' is-invalid' : ''}}">
+                        @if ($errors->has('advance'))
+                            <small class="text-danger">
+                                <strong>{{ $errors->first('advance') }}</strong>
                             </small>
                         @endif
                     </div>

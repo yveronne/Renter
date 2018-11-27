@@ -11,7 +11,7 @@ class CreateTenantsTable extends Migration
      *
      * @return void
      */
-    public function up()
+    public function up()        // todo Add the updates done on the table in all migration files
     {
         Schema::create('tenants', function (Blueprint $table) {
             $table->increments('id');

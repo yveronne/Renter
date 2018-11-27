@@ -3,16 +3,14 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-use illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Tenant extends Model
 {
-    //
-    //use SoftDeletes;
-
+    use SoftDeletes;
     protected $fillable = [
-        'lastName', 'firstName', 'email', 'cniNumber', 'profession', 'phoneNumber',
-        'maritalStatus', 'tenureDate'
+        'civility', 'lastName', 'firstName', 'email', 'cniNumber', 'profession', 'phoneNumber',
+        'maritalStatus', 'tenureDate', 'caution', 'apartmentID'
     ];
 
     protected $dates = ['deleted_at'];

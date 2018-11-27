@@ -9,7 +9,7 @@ class Apartment extends Model
     //
     protected $fillable = [
         'apartmentNumber', 'monthlyRent', 'livingRoomsNumber', 'kitchensNumber',
-        'bedroomsNumber', 'bathroomsNumber', 'buildingID'
+        'bedroomsNumber', 'bathroomsNumber', 'buildingID','currentTenantID'
     ];
 
 
@@ -18,8 +18,17 @@ class Apartment extends Model
         return $this->belongsTo('App\Building', 'buildingID');
     }
 
-    public function tenant(){
+    public function tenants(){
 
-        return $this->hasOne('App\Tenant', 'apartmentID');
+        return $this->hasMany('App\Tenant', 'apartmentID');
+    }
+
+    public function rents(){
+
+        return $this->hasMany('App\Rent', 'apartmentID');
+    }
+
+    public function getCurrentTenant(){
+        return Tenant::whereKey($this->currentTenantID)->first();
     }
 }
