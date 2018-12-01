@@ -6,6 +6,7 @@ use App\Apartment;
 use App\Building;
 use App\Http\Requests\ApartmentRequest;
 use App\Http\Requests\TenantRequest;
+use App\Tenant;
 use Illuminate\Support\Facades\Auth;
 
 class ApartmentController extends Controller
@@ -23,38 +24,16 @@ class ApartmentController extends Controller
         return view('apartments.apartments', compact('buildings'));
     }
 
-    public function create(){
-
-    }
-
-    public function store(ApartmentRequest $request, $id){
-
-        $building = Building::findOrFail($id);
-        Apartment::create([
-            'apartmentNumber' => $request->apartmentNumber,
-            'monthlyRent' => $request->monthlyRent,
-            'livingRoomsNumber' => $request->livingRoomsNumber,
-            'kitchensNumber' => $request->kitchensNumber,
-            'bedroomsNumber' => $request->bedroomsNumber,
-            'bathroomsNumber' => $request->bathroomsNumber,
-            'buildingID' => $building->id
-        ]);
-
-        return redirect('buildings/' .$building->id)->with('status', 'L\'appartement a bien été ajouté');
-    }
-
     public function show(Apartment $apartment){
 
         $apartment = Apartment::findOrFail($apartment->id);
-        return view('apartments.apartmentDetails', compact('apartment'));
+        $tenant = $apartment->getCurrentTenant();
+        return view('apartments.apartmentDetails', compact('apartment', 'tenant'));
     }
 
-    public function edit(){
 
-    }
-
-    public function update(ApartmentRequest $request, Apartment $apartment){
-
+    public function update(Apartment $apartment, ApartmentRequest $request){
+        $apartment = Apartment::findOrFail($apartment->id);
         $apartment->update([
             'apartmentNumber' => $request->apartmentNumber,
             'monthlyRent' => $request->monthlyRent,
@@ -63,11 +42,21 @@ class ApartmentController extends Controller
             'bedroomsNumber' => $request->bedroomsNumber,
             'bathroomsNumber' => $request->bathroomsNumber
         ]);
+        return redirect('/apartments/'.$apartment->id)->with('status', 'Les modifications ont bien été enregistrées.');
+
     }
 
     public function destroy(Apartment $apartment){
         $apartment = Apartment::whereKey($apartment->id);
         Apartment::destroy($apartment->id);
+    }
+
+    public function removeTenant(Apartment $apartment){
+
+        $apartment = Apartment::findOrFail($apartment->id);
+        $apartment->currentTenantID = null;
+        $apartment->save();
+        return redirect('/apartments/'.$apartment->id)->with('status', 'Le locataire a bien été retiré');
     }
 
 }

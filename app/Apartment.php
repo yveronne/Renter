@@ -3,10 +3,13 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Apartment extends Model
 {
     //
+    use SoftDeletes;
+
     protected $fillable = [
         'apartmentNumber', 'monthlyRent', 'livingRoomsNumber', 'kitchensNumber',
         'bedroomsNumber', 'bathroomsNumber', 'buildingID','currentTenantID'

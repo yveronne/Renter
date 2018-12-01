@@ -3,10 +3,13 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Building extends Model
 {
     //
+    use SoftDeletes;
+
     protected $fillable = ['buildingName', 'buildingLocation', 'floorsNumber'];
 
 
@@ -18,5 +21,10 @@ class Building extends Model
     public function apartments(){
 
         return $this->hasMany('App\Apartment', 'buildingID');
+    }
+
+    public function getTenantsNumber(){
+
+        return $this->apartments->where('currentTenantID', '!=', null)->count();
     }
 }

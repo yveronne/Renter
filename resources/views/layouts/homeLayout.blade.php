@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Bienvenue sur Renter</title>
+    <title>Accueil - Bienvenue sur Renter</title>
     <meta name="description" content="Sufee Admin - HTML5 Admin Template">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -32,41 +32,32 @@
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#main-menu" aria-controls="main-menu" aria-expanded="false" aria-label="Toggle navigation">
                 <i class="fa fa-bars"></i>
             </button>
-            <a class="navbar-brand" href="#"><img src="{{asset('images/logo.png')}}" alt="Logo"></a>
-            <a class="navbar-brand hidden" href="#"><img src="{{asset('images/logo2.png')}}" alt="Logo"></a>
+            <a class="navbar-brand" href="{{url('/home')}}">Renter</a>
         </div>
 
         <div id="main-menu" class="main-menu collapse navbar-collapse">
             <ul class="nav navbar-nav">
-                <li class="active">
+                <li class="menu-item active">
                     <a href="{{url('/home')}}"> <i class="menu-icon fa fa-home"></i>{{__('menu.accueil')}}</a>
                 </li>
                 <li class="menu-item">
                     <a href="{{url('/buildings')}}"> <i class="menu-icon fa fa-building"></i>{{__('menu.proprietes')}}</a>
                 </li>
                 <li class="menu-item">
-                    <a href="#"><i class="menu-icon fa fa-door-closed"></i>{{__('menu.appartements')}}</a>
+                    <a href="{{url('/apartments')}}"><i class="menu-icon fa fa-sort-numeric-asc"></i>{{__('menu.appartements')}}</a>
                 </li>
                 <li class="menu-item-has-children dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-users"></i>{{__('menu.locataires')}}</a>
                     <ul class="sub-menu children dropdown-menu">
-                        <li><i class="menu-icon fa fa-th"></i><a href="#">Basic Form</a></li>
-                        <li><i class="menu-icon fa fa-th"></i><a href="#">Advanced Form</a></li>
+                        <li><i class="menu-icon fa fa-users"></i><a href="{{url('/tenants')}}">Tous les locataires</a></li>
+                        <li><i class="menu-icon fa fa-frown-o"></i><a href="#">Les locataires insolvables</a></li>
                     </ul>
                 </li>
                 <li class="menu-item-has-children dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-tasks"></i>{{__('menu.loyers')}}</a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-money"></i>{{__('menu.loyers')}}</a>
                     <ul class="sub-menu children dropdown-menu">
-                        <li><i class="menu-icon fa fa-fort-awesome"></i><a href="#">{{__('menu.tousLoyers')}}</a></li>
+                        <li><i class="menu-icon fa fa-money"></i><a href="{{url('/rents')}}">{{__('menu.tousLoyers')}}</a></li>
                         <li><i class="menu-icon fa fa-thumbs-down"></i><a href="#">{{__('menu.loyersRetard')}}</a></li>
-                    </ul>
-                </li>
-
-                <li class="menu-item-has-children dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-area-chart"></i>{{__('menu.factures')}}</a>
-                    <ul class="sub-menu children dropdown-menu">
-                        <li><i class="menu-icon fa fa-map-o"></i><a href="#">{{__('menu.toutesFactures')}}</a></li>
-                        <li><i class="menu-icon fa fa-thumbs-down"></i><a href="#">{{__('menu.facturesRetard')}}</a></li>
                     </ul>
                 </li>
             </ul>

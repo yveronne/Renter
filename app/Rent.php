@@ -9,11 +9,10 @@ class Rent extends Model
 {
     //
     use SoftDeletes;
-    protected $fillable = [
-        'amount', 'rentMonth', 'advance', 'monthAdvance', 'residue', 'monthResidue',
-        'paymentDate', 'tenantID', 'apartmentID'
-    ];
 
+    protected $fillable = [
+        'rentMonth', 'tenantID', 'apartmentID'
+    ];
 
     protected $dates = ['deleted_at'];
 
@@ -25,5 +24,19 @@ class Rent extends Model
     public function apartment(){
 
         return $this->belongsTo('App\Apartment', 'apartmentID');
+    }
+
+    public function payments(){
+
+        return $this->hasMany('App\Payment', 'rentID');
+    }
+
+    public function getTotalAmountOfPayments(){
+
+        $amount = 0;
+        foreach($this->payments as $payment){
+            $amount += $payment->amount;
+        }
+        return $amount;
     }
 }

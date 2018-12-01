@@ -28,6 +28,7 @@
                 {{ session('status') }}
             </div>
         @endif
+
         <div class="animated fadeIn">
             <div class="row">
                 <div class="col-md-12">
@@ -54,22 +55,33 @@
                             <tr>
                                 <th scope="row">{{$apartment->apartmentNumber}}</th>
                                 <td>{{$apartment->monthlyRent}}</td>
-                                <td>{{$apartment->tenant}}</td>
-                                <td>{{$apartment->tenant}}</td>
-                                <td><a href="#" title="Voir les détails de l'appartment"><i class="fa fa-eye"></i></a></td>
+                                <td>
+                                    @if($apartment->getCurrentTenant())
+                                        {{$apartment->getCurrentTenant()->lastName}} {{$apartment->getCurrentTenant()->firstName}}
+                                    @endif
+                                </td>
+                                <td>
+                                    @if($apartment->getCurrentTenant()->getUnpaidRents() == 0)
+                                        Oui
+                                    @else
+                                        Non
+                                    @endif
+                                </td>
+                                <td><a href="{{url('/apartments/'.$apartment->id)}}" title="Voir les détails de l'appartment"><i class="fa fa-eye"></i></a></td>
                             </tr>
                         @endforeach
                         </tbody>
                     </table>
                     <br>
                     <a href="#" data-toggle="modal" data-target="#updateBuildingModal" class="btn btn-primary">Modifier la propriété</a>
+                    <a href="#" data-toggle="modal" data-target="#deleteBuildingModal" class="btn btn-danger">Supprimer la propriété</a>
                 </div>
             </div>
         </div>
     </div>
 
     <div class="modal fade" id="updateBuildingModal" tabindex="-1" role="dialog" aria-labelledby="updateBuildingModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-dialog modal-md" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="updateBuildingModalLabel">Modifier la propriété</h5>
@@ -124,6 +136,34 @@
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
                         <button type="submit" class="btn btn-primary">Confirmer</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="deleteBuildingModal" tabindex="-1" role="dialog" aria-labelledby="deleteBuildingModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-md" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="updateBuildingModalLabel">Êtes-vous sûr de vouloir supprimer la propriété suivante?</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form action="{{route('buildings.destroy', [$building])}}" method="post">
+                    {{csrf_field()}}
+
+                    <div class="modal-body">
+                        <h6>Nom de la propriété: </h6> {{$building->buildingName}}
+                        <h6>Localisation: </h6> {{$building->buildingLocation}}
+                        <h6>Nombre d'étages: </h6> {{$building->floorsNumber}}
+                        <h6>Nombre d'appartements: </h6> {{$building->apartments->count()}}
+                        <h6>Nombre de locataires: </h6> {{$building->getTenantsNumber()}}
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+                        <button type="submit" class="btn btn-danger">Oui</button>
                     </div>
                 </form>
             </div>

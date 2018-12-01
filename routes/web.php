@@ -24,15 +24,18 @@ Route::group(['middleware' => 'auth'], function(){
     Route::post('/buildings/create', 'BuildingController@store')->name('buildings.store');
     Route::get('/buildings/{building}', 'BuildingController@show')->name('buildings.show');
     Route::post('/buildings/{building}/update', 'BuildingController@update')->name('buildings.update');
-    /*Route::get('/buildings/{building}/apartments', 'BuildingController@apartmentList')
-        ->name('buildings.apartments');*/
     Route::get('/buildings/{building}/addapartment', 'BuildingController@addApartmentView');
     Route::post('/buildings/{building}/addapartment', 'BuildingController@addApartment');
+    Route::post('/buildings/{building}/destroy', 'BuildingController@destroy')->name('buildings.destroy');
 
     Route::get('/apartments', 'ApartmentController@index')->name('apartments.index');
     Route::get('/apartments/{apartment}', 'ApartmentController@show')->name('apartments.show');
     Route::post('/apartments/{apartment}/update', 'ApartmentController@update')->name('apartments.update');
-    //Route::post('/apartments', 'ApartmentController@store')->name('apartments.store');
     Route::get('/apartments/{apartment}/addtenant', 'TenantController@addTenantView');
     Route::post('/apartments/{apartment}/addtenant', 'TenantController@addTenant');
+    Route::post('/apartments/{apartment}/removetenant', 'ApartmentController@removeTenant')->name('apartments.removeTenant'); // todo Try with get method instead of post
+
+
+    Route::get('/tenants', 'TenantController@index')->name('tenants.index');
+    Route::get('/tenants/{tenant}', 'TenantController@show');
 });

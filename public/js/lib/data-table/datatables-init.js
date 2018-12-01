@@ -12,7 +12,9 @@
         lengthMenu: [[10, 20, 50, -1], [10, 20, 50, "All"]],
     });
 
-
+    $('.bootstrap-data-table').DataTable({
+        lengthMenu: [[10, 20, 50, -1], [10, 20, 50, "All"]],
+    });
 
     $('#bootstrap-data-table-export').DataTable({
         dom: 'lBfrtip',

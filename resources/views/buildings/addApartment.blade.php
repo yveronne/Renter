@@ -46,7 +46,7 @@
                         <label for="monthlyRent" class="form-control-label">Loyer mensuel</label>
                     </div>
                     <div class="col-md-7">
-                        <input type="number" step="5000" name="monthlyRent" id="monthlyRent" value="{{old('monthlyRent')}}" class="form-control{{$errors->has('monthlyRent') ? ' is-invalid' : ''}}">
+                        <input type="number" step="5000" min="0" name="monthlyRent" id="monthlyRent" value="{{old('monthlyRent')}}" class="form-control{{$errors->has('monthlyRent') ? ' is-invalid' : ''}}">
                         @if ($errors->has('monthlyRent'))
                             <small class="text-danger">
                                 <strong>{{ $errors->first('monthlyRent') }}</strong>

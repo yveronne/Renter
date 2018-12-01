@@ -22,20 +22,9 @@
     </div>
 
     <div class="content mt-3">
-        @if(session('status'))
-            <div class="alert alert-success">
-                {{ session('status') }}
-            </div>
-        @endif
+        @include('partials.success')
 
         <div class="animated fadeIn">
-            {{--<div class="row addSomething">
-                <div class="col-md-12">
-                    <a href="{{url('/buildings/create')}}" class="btn btn-outline-primary"><i class="fa fa-plus"></i>Ajouter
-                        un appartement</a>
-                </div>
-            </div>--}}
-
             @foreach(Auth::user()->buildings as $building)
                 <div class="row">
                     <div class="col-md-12">
@@ -57,13 +46,19 @@
                                     <th scope="row">{{$apartment->apartmentNumber}}</th>
                                     <td>{{$apartment->monthlyRent}}</td>
                                     <td>
-                                        @if(!is_null($apartment->getCurrentTenant()))
+                                        @if($apartment->getCurrentTenant())
                                         {{$apartment->getCurrentTenant()->lastName}} {{$apartment->getCurrentTenant()->firstName}}
                                         @else
                                             <a href="{{url('/apartments/'.$apartment->id.'/addtenant')}}" class="btn btn-outline-primary">Enregistrer le locataire</a>
                                         @endif
                                     </td>
-                                    <td></td>
+                                    <td>
+                                        @if($apartment->getCurrentTenant() && $apartment->getCurrentTenant()->getUnpaidRents() == 0)
+                                            Oui
+                                        @elseif($apartment->getCurrentTenant() && !($apartment->getCurrentTenant()->getUnpaidRents() == 0))
+                                            Non
+                                        @endif
+                                    </td>
                                     <td><a href="{{route('apartments.show', $apartment)}}" title="Voir les détails de l'appartment"><i class="fa fa-eye"></i></a></td>
                                 </tr>
                             @endforeach

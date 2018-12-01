@@ -28,8 +28,6 @@ class BuildingController extends Controller
 
     public function store(BuildingRequest $request)
     {
-        //
-
         $user = Auth::user();
 
         $user->buildings()->create([
@@ -53,7 +51,6 @@ class BuildingController extends Controller
 
     public function update(Building $building, BuildingRequest $request)
     {
-        //
 
         $building = Building::findOrFail($building->id);
         $building->update([
@@ -74,7 +71,6 @@ class BuildingController extends Controller
      */
     public function destroy(Building $building)
     {
-        //
         Building::destroy($building->id);
 
         return redirect('buildings')->with('status', 'La propriété a bien été supprimée');

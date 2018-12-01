@@ -4,10 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Apartment;
 use App\Http\Requests\TenantRequest;
+use App\Payment;
 use App\Rent;
 use App\Tenant;
-use App\User;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Mpdf\MpdfException;
 
@@ -23,37 +22,17 @@ class TenantController extends Controller
     public function index(){
 
         $user = Auth::user();
-        $user->load(['buildings', 'apartments', 'tenant']);
+        $user->load(['buildings']);
+        return view('tenants.tenants', compact('user'));
     }
 
-    public function create(){
-
-    }
-
-    //Créer un locataire
-    public function store(TenantRequest $request, Apartment $apartment){
-
-        $apartment->tenant()->create([
-            'lastName' => $request->lastName,
-            'firstName' => $request->firstName,
-            'email' => $request->email,
-            'cniNumber' => $request->cniNumber,
-            'profession' => $request->profession,
-            'phoneNumber' => $request->phoneNumber,
-            'maritalStatus' => $request->maritalStatus,
-            'tenureDate' => $request->tenureDate
-        ]);
-
-    }
 
     public function show(Tenant $tenant){
 
         Tenant::findOrFail($tenant->id);
+        return view('tenants.tenantDetails', compact('tenant'));
     }
 
-    public function edit(){
-
-    }
 
     public function update(TenantRequest $request, Tenant $tenant){
 
@@ -101,18 +80,29 @@ class TenantController extends Controller
             'apartmentID' => $apartment->id
         ]);
 
+        $apartment->update([
+            'currentTenantID' => $tenant->id
+        ]);
+
         $advance = $request->advance;
-        $currentMonth = new \DateTime();
-        for($i=1; $i<=$advance; $i++){
-            $j = $i-1;
+        $currentDate = new \DateTime($request->tenureDate);
+        $paymentDate = (new \DateTime($request->tenureDate))->format('Y-m-d');
+        for($i=0; $i<=$advance-1; $i++){
             try {
-                Rent::create([
-                    'amount' => $apartment->monthlyRent,
-                    'paymentDate' => $tenant->tenureDate,
-                    'rentMonth' => ($currentMonth->add(new \DateInterval('P' . $j . 'M')))->format('Y-m-d'),
+                $rent = Rent::create([
+                    'rentMonth' => $currentDate->format('Y-m-d'),
                     'tenantID' => $tenant->id,
                     'apartmentID' => $apartment->id
                 ]);
+                Payment::create([
+                    'amount' => $apartment->monthlyRent,
+                    'paymentDate' => $paymentDate,
+                    'rentID' => $rent->id
+                ]);
+                $rent->settled = true;
+                $rent->save();
+
+                $currentDate->add(new \DateInterval('P1M'));
             } catch (\Exception $e) {           // todo Add redirection to view errors and delete the tenant created
             }
         }

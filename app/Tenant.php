@@ -29,4 +29,39 @@ class Tenant extends Model
 
         return $this->hasMany('App\Bill', 'tenantID');
     }
+
+
+    public function getPaidRents(){
+
+        return $this->rents
+            ->where('apartmentID', $this->apartment->id)
+            ->where('settled', true)->count();
+    }
+
+    public function getUncompletedRents(){
+
+        return $this->rents
+            ->where('apartmentID', $this->apartment->id)
+            ->where('settled', false)->count();
+    }
+
+    public function getUnpaidRents(){
+
+        $lastRent = $this->rents->where('apartmentID', $this->apartment->id)
+            ->sortByDesc('rentMonth')->first();
+
+
+        $months =  (new \DateTime())->diff(new \DateTime($lastRent->rentMonth))->format('%R%m');
+        if($months < 0)  return -$months;
+        else return 0;
+    }
+
+    public function getPayments(){
+
+        $rentsID = array();;
+        foreach($this->rents as $rent){
+            array_push($rentsID, $rent->id);
+        }
+        return Payment::all()->whereIn('rentID', $rentsID);
+    }
 }

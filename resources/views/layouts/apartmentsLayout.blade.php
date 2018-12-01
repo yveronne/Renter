@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Bienvenue sur Renter</title>
+    <title>Mes appartements</title>
     <meta name="description" content="Sufee Admin - HTML5 Admin Template">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -15,6 +15,7 @@
     <link rel="stylesheet" href="{{asset('css/cs-skin-elastic.css')}}">
     <link rel="stylesheet" href="{{asset('scss/style.css')}}">
     <link rel="stylesheet" href="{{asset('css/myStyle.css')}}">
+    <link rel="stylesheet" href="{{asset('css/lib/datatable/dataTables.bootstrap.min.css')}}">
 
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800" rel="stylesheet" type="text/css">
 
@@ -42,29 +43,21 @@
                 <li class="menu-item">
                     <a href="{{url('/buildings')}}"> <i class="menu-icon fa fa-building"></i>{{__('menu.proprietes')}}</a>
                 </li>
-                <li class="active">
-                    <a href="{{url('/apartments')}}"><i class="menu-icon fa fa-door-closed"></i>{{__('menu.appartements')}}</a>
+                <li class="menu-item active">
+                    <a href="{{url('/apartments')}}"><i class="menu-icon fa fa-sort-numeric-asc"></i>{{__('menu.appartements')}}</a>
                 </li>
                 <li class="menu-item-has-children dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-users"></i>{{__('menu.locataires')}}</a>
                     <ul class="sub-menu children dropdown-menu">
-                        <li><i class="menu-icon fa fa-th"></i><a href="#">Basic Form</a></li>
-                        <li><i class="menu-icon fa fa-th"></i><a href="#">Advanced Form</a></li>
+                        <li><i class="menu-icon fa fa-users"></i><a href="{{url('/tenants')}}">Tous les locataires</a></li>
+                        <li><i class="menu-icon fa fa-frown-o"></i><a href="#">Les locataires insolvables</a></li>
                     </ul>
                 </li>
                 <li class="menu-item-has-children dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-tasks"></i>{{__('menu.loyers')}}</a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-money"></i>{{__('menu.loyers')}}</a>
                     <ul class="sub-menu children dropdown-menu">
-                        <li><i class="menu-icon fa fa-fort-awesome"></i><a href="#">{{__('menu.tousLoyers')}}</a></li>
+                        <li><i class="menu-icon fa fa-money"></i><a href="{{url('/rents')}}">{{__('menu.tousLoyers')}}</a></li>
                         <li><i class="menu-icon fa fa-thumbs-down"></i><a href="#">{{__('menu.loyersRetard')}}</a></li>
-                    </ul>
-                </li>
-
-                <li class="menu-item-has-children dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-area-chart"></i>{{__('menu.factures')}}</a>
-                    <ul class="sub-menu children dropdown-menu">
-                        <li><i class="menu-icon fa fa-map-o"></i><a href="#">{{__('menu.toutesFactures')}}</a></li>
-                        <li><i class="menu-icon fa fa-thumbs-down"></i><a href="#">{{__('menu.facturesRetard')}}</a></li>
                     </ul>
                 </li>
             </ul>
@@ -146,6 +139,24 @@
 <script src="{{asset('js/plugins.js')}}"></script>
 <script src="{{asset('js/main.js')}}"></script>
 <script src="{{asset('js/myScript.js')}}"></script>
+
+<script src="{{asset('js/lib/data-table/datatables.min.js')}}"></script>
+<script src="{{asset('js/lib/data-table/dataTables.bootstrap.min.js')}}"></script>
+<script src="{{asset('js/lib/data-table/dataTables.buttons.min.js')}}"></script>
+<script src="{{asset('js/lib/data-table/buttons.bootstrap.min.js')}}"></script>
+<script src="{{asset('js/lib/data-table/jszip.min.js')}}"></script>
+<script src="{{asset('js/lib/data-table/pdfmake.min.js')}}"></script>
+<script src="{{asset('js/lib/data-table/vfs_fonts.js')}}"></script>
+<script src="{{asset('js/lib/data-table/buttons.html5.min.js')}}"></script>
+<script src="{{asset('js/lib/data-table/buttons.print.min.js')}}"></script>
+<script src="{{asset('js/lib/data-table/buttons.colVis.min.js')}}"></script>
+<script src="{{asset('js/lib/data-table/datatables-init.js')}}"></script>
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('#bootstrap-data-table-export').DataTable();
+    } );
+</script>
 
 
 

@@ -174,7 +174,7 @@
                         <label for="caution" class="form-control-label">Caution (en F CFA)</label>
                     </div>
                     <div class="col-md-7">
-                        <input type="number" name="caution" id="caution" value="{{old('caution')}}" class="form-control{{$errors->has('caution') ? ' is-invalid' : ''}}">
+                        <input type="number" name="caution" id="caution" value="{{$apartment->monthlyRent}}" class="form-control{{$errors->has('caution') ? ' is-invalid' : ''}}">
                         @if ($errors->has('caution'))
                             <small class="text-danger">
                                 <strong>{{ $errors->first('caution') }}</strong>
