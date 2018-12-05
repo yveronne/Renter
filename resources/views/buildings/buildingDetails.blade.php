@@ -61,7 +61,7 @@
                                     @endif
                                 </td>
                                 <td>
-                                    @if($apartment->getCurrentTenant()->getUnpaidRents() == 0)
+                                    @if($apartment->getCurrentTenant() && $apartment->getCurrentTenant()->getUnpaidRents() == 0)
                                         Oui
                                     @else
                                         Non
@@ -124,8 +124,8 @@
                                 <label for="floorsNumber" class="form-control-label">Nombre d'étages</label>
                             </div>
                             <div class="col-md-7">
-                                <input type="number" step="1" name="floorsNumber" id="floorsNumber" value="{{$building->floorsNumber}}" class="form-control{{$errors->has('floorsNumber') ? ' is-invalid' : ''}}">
-                                @if ($errors->has('buildingLocation'))
+                                <input type="number" step="1" min="0" name="floorsNumber" id="floorsNumber" value="{{$building->floorsNumber}}" class="form-control{{$errors->has('floorsNumber') ? ' is-invalid' : ''}}">
+                                @if ($errors->has('floorsNumber'))
                                     <small class="text-danger">
                                         <strong>{{ $errors->first('floorsNumber') }}</strong>
                                     </small>

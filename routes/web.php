@@ -37,5 +37,8 @@ Route::group(['middleware' => 'auth'], function(){
 
 
     Route::get('/tenants', 'TenantController@index')->name('tenants.index');
-    Route::get('/tenants/{tenant}', 'TenantController@show');
-});
+    Route::get('/tenants/details/{tenant}', 'TenantController@show');
+    Route::get('/tenants/insolvent', 'TenantController@indexInsolvent');
+
+    Route::post('/tenants/details/{tenant}/addpayment', 'PaymentController@addPayment')->name('tenants.addPayment');
+    });

@@ -7,6 +7,7 @@ use App\Http\Requests\TenantRequest;
 use App\Payment;
 use App\Rent;
 use App\Tenant;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Mpdf\MpdfException;
 
@@ -24,6 +25,13 @@ class TenantController extends Controller
         $user = Auth::user();
         $user->load(['buildings']);
         return view('tenants.tenants', compact('user'));
+    }
+
+    public function indexInsolvent(){
+
+        $user = Auth::user();
+        $user->load(['buildings']);
+        return view('tenants.insolventTenants', compact('user'));
     }
 
 
@@ -130,4 +138,5 @@ class TenantController extends Controller
         }
 
     }
+
 }

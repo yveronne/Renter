@@ -50,7 +50,7 @@
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"> <i class="menu-icon fa fa-users"></i>{{__('menu.locataires')}}</a>
                     <ul class="sub-menu children dropdown-menu">
                         <li class="active"><i class="menu-icon fa fa-users"></i><a href="{{url('/tenants')}}">Tous les locataires</a></li>
-                        <li><i class="menu-icon fa fa-frown-o"></i><a href="#">Les locataires insolvables</a></li>
+                        <li><i class="menu-icon fa fa-frown-o"></i><a href="{{url('/tenants/insolvent')}}">Les locataires insolvables</a></li>
                     </ul>
                 </li>
                 <li class="menu-item-has-children dropdown">

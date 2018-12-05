@@ -30,6 +30,12 @@ class Tenant extends Model
         return $this->hasMany('App\Bill', 'tenantID');
     }
 
+    public function getLastRent(){
+
+        return $this->rents->where('apartmentID', $this->apartment->id)
+            ->sortByDesc('id')->first();
+    }
+
 
     public function getPaidRents(){
 
@@ -56,12 +62,13 @@ class Tenant extends Model
         else return 0;
     }
 
+
     public function getPayments(){
 
         $rentsID = array();;
         foreach($this->rents as $rent){
             array_push($rentsID, $rent->id);
         }
-        return Payment::all()->whereIn('rentID', $rentsID);
+        return Payment::all()->whereIn('rentID', $rentsID)->sortByDesc('id');
     }
 }

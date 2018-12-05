@@ -168,6 +168,7 @@ return [
         /*
          * Package Service Providers...
          */
+        'Jenssegers\Date\DateServiceProvider',
 
         /*
          * Application Service Providers...

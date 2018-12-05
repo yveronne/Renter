@@ -26,7 +26,11 @@
         <div class="animated fadeIn">
             <div class="row">
                 <div class="col-md-12">
+                    @include('partials.success')
                     <h4 class="titleCentered">Informations sur le locataire</h4>
+                    <div style="text-align: right">
+                        <a href="#" data-toggle="modal" data-target="#addPaymentModal" class="btn btn-outline-primary">Enregistrer un paiement</a>
+                    </div>
                     <br>
                 </div>
                 <div class="col-md-6">
@@ -116,7 +120,7 @@
                             <tr>
                                 <td>{{(new \DateTime($payment->paymentDate))->format('d-m-Y')}}</td>
                                 <td>{{$payment->amount}}</td>
-                                <td>{{(new \DateTime($payment->rent->rentMonth))->format('m-Y')}}</td>
+                                <td>{{ucfirst((new \Jenssegers\Date\Date($payment->rent->rentMonth))->format('F Y'))}}</td>
                             </tr>
                         @endforeach
                         </tbody>
@@ -132,13 +136,13 @@
                             <th>Mois du loyer</th>
                             <th>Réglé entièrement ?</th>
                             <th>Nombre de paiements</th>
-                            <th>Détails des paiements</th>
+                            <th>Date (Montant) des paiements</th>
                         </tr>
                         </thead>
                         <tbody>
-                        @foreach($tenant->rents as $rent)
+                        @foreach($tenant->rents->sortByDesc('id') as $rent)
                             <tr>
-                                <td>{{(new \DateTime($rent->rentMonth))->format('m-Y')}}</td>
+                                <td>{{ucfirst((new \Jenssegers\Date\Date($rent->rentMonth))->format('F Y'))}}</td>
                                 <td>
                                     @if($rent->settled)
                                         Oui
@@ -149,7 +153,7 @@
                                 <td>{{$rent->payments->count()}}</td>
                                 <td>
                                     @foreach($rent->payments as $payment)
-                                        {{(new \DateTime($payment->paymentDate))->format('d-m-Y')}} ( {{$payment->amount}} F CFA)<br>
+                                        {{(new \Jenssegers\Date\Date($payment->paymentDate))->format('d F Y')}} ( {{$payment->amount}} F CFA) ;
                                     @endforeach
                                 </td>
                             </tr>
@@ -157,6 +161,58 @@
                         </tbody>
                     </table>
                 </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="addPaymentModal" tabindex="-1" role="dialog" aria-labelledby="addPaymentModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-md" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addPaymentModalLabel">Enregistrer un paiement</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form action="{{route('tenants.addPayment', [$tenant])}}" method="post">
+                    {{csrf_field()}}
+
+                    <div class="modal-body">
+                        <span class="spanTitle">Propriété: </span><span class="spanValue">{{$tenant->apartment->building->buildingName}}, {{$tenant->apartment->building->buildingLocation}}</span><br>
+                        <span class="spanTitle">Appartement: </span><span class="spanValue">{{$tenant->apartment->apartmentNumber}}</span><br>
+                        <span class="spanTitle">Locataire: </span><span class="spanValue">{{$tenant->lastName}} {{$tenant->firstName}}</span><br><br>
+                        <div class="row form-group{{$errors->has('amount') ? ' has-warning' : ''}}">
+                            <div class="col-md-5">
+                                <label for="amount" class="form-control-label">Montant du paiement</label>
+                            </div>
+                            <div class="col-md-7">
+                                <input type="number" step="500" min="0" name="amount" id="amount" value="{{old('amount')}}" class="form-control{{$errors->has('amount') ? ' is-invalid' : ''}}">
+                                @if ($errors->has('amount'))
+                                    <small class="text-danger">
+                                        <strong>{{ $errors->first('amount') }}</strong>
+                                    </small>
+                                @endif
+                            </div>
+                        </div>
+                        <div class="row form-group{{$errors->has('date') ? ' has-warning' : ''}}">
+                            <div class="col-md-5">
+                                <label for="date" class="form-control-label">Date du paiement</label>
+                            </div>
+                            <div class="col-md-7">
+                                <input type="date" name="date" id="date" value="{{old('date')}}" class="form-control{{$errors->has('date') ? ' is-invalid' : ''}}">
+                                @if ($errors->has('date'))
+                                    <small class="text-danger">
+                                        <strong>{{ $errors->first('date') }}</strong>
+                                    </small>
+                                @endif
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+                        <button type="submit" class="btn btn-primary">Confirmer</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>

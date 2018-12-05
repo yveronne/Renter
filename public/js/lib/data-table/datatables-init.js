@@ -10,10 +10,38 @@
 
     $('#bootstrap-data-table').DataTable({
         lengthMenu: [[10, 20, 50, -1], [10, 20, 50, "All"]],
+        "aaSorting": [],
+        "select" :true,
+        "language": {
+            "lengthMenu": "Affichage de _MENU_ entrées par page",
+            "zeroRecords": "Aucun élément à afficher",
+            "info": "Page _PAGE_ sur _PAGES_",
+            "infoEmpty": "Aucun résultat",
+            "infoFiltered": "(filtrage de _MAX_ max)",
+            "search" : "Rechercher",
+            "paginate" :{
+                "previous" : "Précédent",
+                "next" : "Suivant"
+            }
+        }
     });
 
     $('.bootstrap-data-table').DataTable({
         lengthMenu: [[10, 20, 50, -1], [10, 20, 50, "All"]],
+        "aaSorting": [],
+        "select" :true,
+        "language": {
+            "lengthMenu": "Affichage de _MENU_ entrées par page",
+            "zeroRecords": "Aucun élément à afficher",
+            "info": "Page _PAGE_ sur _PAGES_",
+            "infoEmpty": "Aucun résultat",
+            "infoFiltered": "(filtrage de _MAX_ max)",
+            "search" : "Rechercher",
+            "paginate" :{
+                "previous" : "Précédent",
+                "next" : "Suivant"
+            }
+        }
     });
 
     $('#bootstrap-data-table-export').DataTable({

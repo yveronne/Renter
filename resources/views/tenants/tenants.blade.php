@@ -62,7 +62,7 @@
                                                     <a href="#"> <i class="fa fa-smile-o"></i> Loyers payés <span class="badge badge-success pull-right">{{$apartment->getCurrentTenant()->getPaidRents()}}</span></a>
                                                 </li>
                                                 <li class="list-group-item">
-                                                    <a href="{{url('/tenants/'.$apartment->getCurrentTenant()->id)}}" class="btn btn-outline-primary">Détails du locataire</a>
+                                                    <a href="{{url('/tenants/details/'.$apartment->getCurrentTenant()->id)}}" class="btn btn-outline-primary">Détails du locataire</a>
                                                 </li>
                                             </ul>
 
