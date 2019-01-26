@@ -37,7 +37,7 @@
 
         <div id="main-menu" class="main-menu collapse navbar-collapse">
             <ul class="nav navbar-nav">
-                <li class="menu-item active">
+                <li class="menu-item">
                     <a href="{{url('/home')}}"> <i class="menu-icon fa fa-home"></i>{{__('menu.accueil')}}</a>
                 </li>
                 <li class="menu-item">
@@ -51,13 +51,6 @@
                     <ul class="sub-menu children dropdown-menu">
                         <li><i class="menu-icon fa fa-users"></i><a href="{{url('/tenants')}}">Tous les locataires</a></li>
                         <li><i class="menu-icon fa fa-frown-o"></i><a href="#">Les locataires insolvables</a></li>
-                    </ul>
-                </li>
-                <li class="menu-item-has-children dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-money"></i>{{__('menu.loyers')}}</a>
-                    <ul class="sub-menu children dropdown-menu">
-                        <li><i class="menu-icon fa fa-money"></i><a href="{{url('/rents')}}">{{__('menu.tousLoyers')}}</a></li>
-                        <li><i class="menu-icon fa fa-thumbs-down"></i><a href="#">{{__('menu.loyersRetard')}}</a></li>
                     </ul>
                 </li>
             </ul>

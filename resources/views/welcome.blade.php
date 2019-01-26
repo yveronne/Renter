@@ -32,6 +32,7 @@
                 <div class="title m-b-md">
                     Bienvenue sur Renter
                 </div>
+                <h3>Connectez-vous pour commencer</h3>
 
             </div>
         </div>

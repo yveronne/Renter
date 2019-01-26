@@ -53,13 +53,6 @@
                         <li><i class="menu-icon fa fa-frown-o"></i><a href="{{url('/tenants/insolvent')}}">Les locataires insolvables</a></li>
                     </ul>
                 </li>
-                <li class="menu-item-has-children dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-money"></i>{{__('menu.loyers')}}</a>
-                    <ul class="sub-menu children dropdown-menu">
-                        <li><i class="menu-icon fa fa-money"></i><a href="{{url('/rents')}}">{{__('menu.tousLoyers')}}</a></li>
-                        <li><i class="menu-icon fa fa-thumbs-down"></i><a href="#">{{__('menu.loyersRetard')}}</a></li>
-                    </ul>
-                </li>
             </ul>
         </div><!-- /.navbar-collapse -->
     </nav>

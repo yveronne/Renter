@@ -32,8 +32,7 @@
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#main-menu" aria-controls="main-menu" aria-expanded="false" aria-label="Toggle navigation">
                 <i class="fa fa-bars"></i>
             </button>
-            <a class="navbar-brand" href="#"><img src="{{asset('images/logo.png')}}" alt="Logo"></a>
-            <a class="navbar-brand hidden" href="#"><img src="{{asset('images/logo2.png')}}" alt="Logo"></a>
+            <a class="navbar-brand" href="{{url('/home')}}">Renter</a>
         </div>
 
         <div id="main-menu" class="main-menu collapse navbar-collapse">
@@ -45,7 +44,7 @@
                     <a href="{{url('/buildings')}}"> <i class="menu-icon fa fa-building"></i>{{__('menu.proprietes')}}</a>
                 </li>
                 <li class="menu-item">
-                    <a href="#"><i class="menu-icon fa fa-door-closed"></i>{{__('menu.appartements')}}</a>
+                    <a href="{{url('/apartments')}}"><i class="menu-icon fa fa-sort-numeric-asc"></i>{{__('menu.appartements')}}</a>
                 </li>
                 <li class="menu-item-has-children dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-users"></i>{{__('menu.locataires')}}</a>
