@@ -22,6 +22,7 @@ class CreateApartmentsTable extends Migration
             $table->integer('bedroomsNumber');
             $table->integer('bathroomsNumber');
             $table->integer('buildingID')->unsigned();
+            $table->integer('currentTenantID')->unsigned()->default(null);
             $table->timestamps();
         });
 

@@ -20,7 +20,7 @@
             @if (Route::has('login'))
                 <div class="top-right links">
                     @auth
-                        <a href="{{ url('/home') }}">Home</a>
+                        <a href="{{ url('/home') }}">Accueil</a>
                     @else
                         <a href="{{ route('login') }}">Se connecter</a>
                         <a href="{{ route('register') }}">S'inscrire</a>
@@ -29,7 +29,7 @@
             @endif
 
             <div class="content">
-                <div class="title m-b-md">
+                <div class="title col-md-12 col-sm-12 col-xs-12">
                     Bienvenue sur Renter
                 </div>
                 <h3>Connectez-vous pour commencer</h3>

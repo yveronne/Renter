@@ -32,13 +32,13 @@
                         <br>
                         <table class="table table-striped">
                             <thead>
-                            <tr>
-                                <th scope="col">Numéro</th>
-                                <th scope="col">Loyer mensuel (F CFA)</th>
-                                <th scope="col">Locataire</th>
-                                <th scope="col">En règle ?</th>
-                                <th scope="col">Actions</th>
-                            </tr>
+                                <tr>
+                                    <th scope="col">Numéro</th>
+                                    <th scope="col">Loyer mensuel (F CFA)</th>
+                                    <th scope="col">Locataire</th>
+                                    <th scope="col">En règle ?</th>
+                                    <th scope="col">Actions</th>
+                                </tr>
                             </thead>
                             <tbody>
                             @foreach($building->apartments as $apartment)

@@ -15,21 +15,19 @@ class CreateRentsTable extends Migration
     {
         Schema::create('rents', function (Blueprint $table) {
             $table->increments('id');
-            $table->date('paymentDate');
-            $table->double('amount');
             $table->date('rentMonth');
-            $table->boolean('advance');
-            $table->date('monthAdvance');
-            $table->boolean('residue');
-            $table->date('monthResidue');
+            $table->boolean('settled')->default(false);
             $table->integer('tenantID')->unsigned();
+            $table->integer('apartmentID')->unsigned();
             $table->timestamps();
         });
+
 
         Schema::table('rents', function(Blueprint $table){
             $table->foreign('tenantID')
                 ->references('id')->on('tenants');
-
+            $table->foreign('apartmentID')
+                ->references('id')->on('apartments');
             $table->softDeletes();
         });
     }

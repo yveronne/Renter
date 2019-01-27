@@ -11,7 +11,7 @@ class CreateTenantsTable extends Migration
      *
      * @return void
      */
-    public function up()        // todo Add the updates done on the table in all migration files
+    public function up()
     {
         Schema::create('tenants', function (Blueprint $table) {
             $table->increments('id');
@@ -23,6 +23,7 @@ class CreateTenantsTable extends Migration
             $table->string('phoneNumber');
             $table->date('tenureDate');
             $table->string('maritalStatus');
+            $table->double('caution');
             $table->integer('apartmentID')->unsigned();
             $table->timestamps();
         });
