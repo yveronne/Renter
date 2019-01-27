@@ -27,6 +27,8 @@ class CreateBuildingsTable extends Migration
             $table->foreign('renterID')
                 ->references('id')->on('users')
                 ->onDelete('cascade');
+
+            $table->softDeletes();
         });
     }
 

@@ -30,6 +30,8 @@ class CreateApartmentsTable extends Migration
             $table->foreign('buildingID')
                 ->references('id')->on('buildings')
                 ->onDelete('cascade');
+
+            $table->softDeletes();
         });
     }
 
